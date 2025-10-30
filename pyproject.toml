@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "slider-solver-cv"
-version = "0.1.1"
+version = "0.1.2"
 description = "识别滑块验证码缺口位置"
 readme = "README.md"
 authors = [
