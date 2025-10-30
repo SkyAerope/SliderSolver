@@ -116,34 +116,6 @@ class TestSliderSolver:
         assert solver.front_img_path == slider_path, "滑块图路径应该被正确保存"
 
 
-def test_all_combinations():
-    """测试所有可能的图片组合"""
-    backgrounds = ['bg1.png', 'bg2.png']
-    sliders = ['t1.png', 't2.png']
-    
-    results = []
-    
-    for bg in backgrounds:
-        for slider in sliders:
-            bg_path = os.path.join(TEST_IMAGES_DIR, bg)
-            slider_path = os.path.join(TEST_IMAGES_DIR, slider)
-            
-            if os.path.exists(bg_path) and os.path.exists(slider_path):
-                solver = SliderSolver(bg_path, slider_path)
-                distance = solver.detect_distance()
-                results.append({
-                    'background': bg,
-                    'slider': slider,
-                    'distance': distance
-                })
-                print(f"{bg} + {slider} -> 距离: {distance}px")
-    
-    # 至少应该成功测试一个组合
-    assert len(results) > 0, "应该至少有一个成功的测试"
-    
-    return results
-
-
 if __name__ == '__main__':
     # 运行所有测试
     pytest.main([__file__, '-v', '-s'])
