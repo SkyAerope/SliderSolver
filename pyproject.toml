@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "slider-solver-cv"
+version = "0.1.0"
+description = "一个用于识别滑块验证码位置的Python包"
+readme = "README.md"
+authors = [
+    {name = "SkyAerope", email = "skyaerope@gmail.com"}
+]
+license = {text = "APACHE-2.0"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: APACHE-2.0 License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["slider", "captcha", "opencv", "computer-vision"]
+requires-python = ">=3.7"
+dependencies = [
+    "opencv-python>=4.5.0",
+    "numpy>=1.19.0",
+    "pillow>=8.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/SkyAerope/SliderSolver"
+"Bug Reports" = "https://github.com/SkyAerope/SliderSolver/issues"
+"Source" = "https://github.com/SkyAerope/SliderSolver"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,11 @@
+include README.md
+include LICENSE
+include pyproject.toml
+include requirements.txt
+
+# 排除测试文件和开发文件
+recursive-exclude tests *
+recursive-exclude .github *
+exclude demo.py
+exclude .gitignore
+exclude todo.txt
