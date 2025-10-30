@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "slider-solver-cv"
-version = "0.1.0"
-description = "一个用于识别滑块验证码位置的Python包"
+version = "0.1.1"
+description = "识别滑块验证码缺口位置"
 readme = "README.md"
 authors = [
     {name = "SkyAerope", email = "skyaerope@gmail.com"}
@@ -24,7 +24,7 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 keywords = ["slider", "captcha", "opencv", "computer-vision"]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 dependencies = [
     "opencv-python>=4.5.0",
     "numpy>=1.19.0",

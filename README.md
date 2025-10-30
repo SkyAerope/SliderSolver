@@ -32,7 +32,7 @@ pip install slider-solver-cv
 
 ## 依赖
 
-- Python >= 3.7
+- Python >= 3.9
 - opencv-python >= 4.5.0
 - numpy >= 1.19.0
 - pillow >= 8.0.0
@@ -65,23 +65,23 @@ def solve_slider_captcha():
     # 图片路径
     bg_img = 'images/background.png'
     slider_img = 'images/slider.png'
-    
+  
     # 检查文件是否存在
     if not os.path.exists(bg_img) or not os.path.exists(slider_img):
         print("错误：图片文件不存在")
         return
-    
+  
     # 创建求解器
     solver = SliderSolver(bg_img, slider_img)
-    
+  
     # 计算位置
     distance = solver.detect_distance()
     print(f'✅ 识别成功！缺口位置在 x = {distance}px')
-    
+  
     # 可选：绘制标记线并保存结果图片
     result_path = solver.draw_line(distance, bg_img)
     print(f'📁 结果图片已保存到: {result_path}')
-    
+  
     return distance
 
 if __name__ == '__main__':
@@ -114,6 +114,7 @@ print(f'结果保存到: {result_path}')
 初始化求解器。
 
 **参数：**
+
 - `bg_img_path` (str): 背景图片的文件路径
 - `front_img_path` (str): 缺口图片的文件路径
 
@@ -122,9 +123,11 @@ print(f'结果保存到: {result_path}')
 检测缺口在背景图中的 x 坐标位置。
 
 **返回值：**
+
 - `int`: 缺口距离左边界的像素距离
 
 **示例：**
+
 ```python
 solver = SliderSolver('bg.png', 'slider.png')
 distance = solver.detect_distance()  # 返回如: 120
@@ -135,14 +138,17 @@ distance = solver.detect_distance()  # 返回如: 120
 在背景图上绘制红色竖线标记位置。
 
 **参数：**
+
 - `x` (int): 竖线的 x 坐标
 - `bg_img_path` (str): 背景图片路径
 - `target_path` (str, 可选): 结果图片保存路径，不指定则自动生成（添加 `_result` 后缀）
 
 **返回值：**
+
 - `str`: 保存的结果图片路径
 
 **示例：**
+
 ```python
 result_path = solver.draw_line(120, 'bg.png')  # 自动保存为 bg_result.png
 # 或指定路径
@@ -193,6 +199,8 @@ pip install -r requirements.txt
 ```
 
 ### 运行测试
+
+`tests/test_images`中含有示例图片，可以用于测试目的
 
 ```bash
 # 运行所有测试
