@@ -6,5 +6,5 @@ SliderSolver - 滑块验证码位置识别工具
 
 from .solver import SliderSolver
 
-__version__ = "0.1.0"
+__version__ = "2.0.0"
 __all__ = ["SliderSolver"]

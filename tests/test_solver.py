@@ -30,6 +30,7 @@ class TestSliderSolver:
         
         # 验证结果
         assert isinstance(distance, int), "返回值应该是整数"
+        assert solver.distance == distance, "检测结果应该缓存在实例属性中"
         assert distance > 0, "距离应该大于0"
         assert distance < 500, "距离应该在合理范围内"
         
@@ -50,21 +51,23 @@ class TestSliderSolver:
         
         # 验证结果
         assert isinstance(distance, int), "返回值应该是整数"
+        assert solver.distance == distance, "检测结果应该缓存在实例属性中"
         assert distance > 0, "距离应该大于0"
         assert distance < 500, "距离应该在合理范围内"
         
         print(f"测试用例2 - 检测到的距离: {distance}px")
     
-    def test_draw_line_default_path(self):
-        """测试绘制标记线功能（默认保存路径）"""
+    def test_save_marked_default_path(self):
+        """测试标记识别结果功能（先调用 detect_distance 后保存）"""
         bg_path = os.path.join(TEST_IMAGES_DIR, 'bg1.png')
         slider_path = os.path.join(TEST_IMAGES_DIR, 't1.png')
-        
+        default_output = os.path.join(TEST_IMAGES_DIR, 'bg1_result.png')
+
         solver = SliderSolver(bg_path, slider_path)
-        distance = solver.detect_distance()
-        
-        # 绘制标记线
-        result_path = solver.draw_line(distance, bg_path)
+        solver.detect_distance()
+
+        # 标记识别结果
+        result_path = solver.save_marked(default_output)
         
         # 验证结果文件
         assert result_path is not None, "应该返回结果路径"
@@ -77,17 +80,17 @@ class TestSliderSolver:
         if os.path.exists(result_path):
             os.remove(result_path)
     
-    def test_draw_line_custom_path(self):
-        """测试绘制标记线功能（自定义保存路径）"""
+    def test_save_marked_custom_path(self):
+        """测试标记识别结果功能（自定义保存路径）"""
         bg_path = os.path.join(TEST_IMAGES_DIR, 'bg1.png')
         slider_path = os.path.join(TEST_IMAGES_DIR, 't1.png')
         custom_output = os.path.join(TEST_IMAGES_DIR, 'test_custom_output.png')
         
         solver = SliderSolver(bg_path, slider_path)
-        distance = solver.detect_distance()
+        solver.detect_distance()
         
-        # 绘制标记线到自定义路径
-        result_path = solver.draw_line(distance, bg_path, custom_output)
+        # 标记识别结果到自定义路径
+        result_path = solver.save_marked(custom_output)
         
         # 验证结果
         assert result_path == custom_output, "应该返回自定义路径"
@@ -98,6 +101,16 @@ class TestSliderSolver:
         # 清理测试生成的文件
         if os.path.exists(result_path):
             os.remove(result_path)
+
+    def test_save_marked_without_detect_raises(self):
+        """测试未调用 detect_distance() 直接调用 save_marked() 抛出异常"""
+        bg_path = os.path.join(TEST_IMAGES_DIR, 'bg1.png')
+        slider_path = os.path.join(TEST_IMAGES_DIR, 't1.png')
+        output_path = os.path.join(TEST_IMAGES_DIR, 'should_not_exist.png')
+
+        solver = SliderSolver(bg_path, slider_path)
+        with pytest.raises(RuntimeError):
+            solver.save_marked(output_path)
     
     def test_invalid_image_path(self):
         """测试无效图片路径的处理"""
@@ -110,10 +123,11 @@ class TestSliderSolver:
         bg_path = os.path.join(TEST_IMAGES_DIR, 'bg1.png')
         slider_path = os.path.join(TEST_IMAGES_DIR, 't1.png')
         
-        solver = SliderSolver(bg_path, slider_path)
+        solver = SliderSolver(bg_img_path=bg_path, tile_img_path=slider_path)
         
         assert solver.bg_img_path == bg_path, "背景图路径应该被正确保存"
-        assert solver.front_img_path == slider_path, "滑块图路径应该被正确保存"
+        assert solver.tile_img_path == slider_path, "滑块图路径应该被正确保存"
+        assert solver.distance is None, "初始状态下 distance 应为 None"
 
 
 if __name__ == '__main__':

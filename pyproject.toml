@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "slider-solver-cv"
-version = "0.1.2"
+version = "2.0.0"
 description = "识别滑块验证码缺口位置"
 readme = "README.md"
 authors = [
@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 keywords = ["slider", "captcha", "opencv", "computer-vision"]
 requires-python = ">=3.9"
@@ -41,3 +42,7 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
